@@ -1,0 +1,1 @@
+export const GRUPOS = ['Pecho', 'Espalda', 'Piernas', 'Brazos', 'Hombros'];
