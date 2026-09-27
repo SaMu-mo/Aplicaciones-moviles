@@ -5,8 +5,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RoutineProvider } from './src/context/RoutineContext';
 import DrawerNavigator from './src/navigators/DrawerNavigator';
-import ChestDetailScreen from './src/screens/ChestDetailScreen';
+import RoutineDetailScreen from './src/screens/RoutineDetailScreen';
+import AddRoutineScreen from './src/screens/AddRoutineScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,25 +29,37 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <StatusBar barStyle="light-content" backgroundColor="#0B0B0F" />
-        <NavigationContainer theme={GymProTheme}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="DrawerRoot"
-              component={DrawerNavigator}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ChestDetail"
-              component={ChestDetailScreen}
-                                          options={{
-                title: 'Rutina de Pecho',
-                headerStyle: { backgroundColor: '#0B0B0F' },
-                headerTintColor: '#FFFFFF',
-                headerBackButtonDisplayMode: 'minimal',
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <RoutineProvider>
+          <NavigationContainer theme={GymProTheme}>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="DrawerRoot"
+                component={DrawerNavigator}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="RoutineDetail"
+                component={RoutineDetailScreen}
+                options={{
+                  title: 'Detalle de Rutina',
+                  headerStyle: { backgroundColor: '#0B0B0F' },
+                  headerTintColor: '#FFFFFF',
+                  headerBackButtonDisplayMode: 'minimal',
+                }}
+              />
+              <Stack.Screen
+                name="AddRoutine"
+                component={AddRoutineScreen}
+                options={{
+                  title: 'Rutina',
+                  headerStyle: { backgroundColor: '#0B0B0F' },
+                  headerTintColor: '#FFFFFF',
+                  headerBackButtonDisplayMode: 'minimal',
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </RoutineProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
